@@ -1,0 +1,15 @@
+Using Moralis Backend
+We'll use moralis to continiously check for events that get triggered when we change any state in the smart contracts.
+Our Frontend is integrated with moralis(with appid and server url etc) that means we our front end is connected with moralis server.
+We'll spin up a server file(frpc) from the front end that connects our front end integrated with moralis server with the local hardhat node server where our contracts are deployed.
+Now Progrmatically(by running addEvents.js script) we make our moralis backend to listen for events(example - itemListed,itemUpdated) in the smart contracts.This creates a table of different events in the moralis backend.
+Moralis eventlisted table would have confirmed column as false because in local hardhat node after a nft would list and an event emits there would be no blocked mined.So we can manually mine some blocks to make that confirmed column as true.
+We create a new table which will be used to display items onto frontend.
+This new table changes according to any change like create,update or deletes in other tables(also after confirmed column is true in other table) which makes our new table flexible to changes and our frontend gets displayed correctly.
+We create this new table via running updateActiveItems.js script  which incapsulates moralis cloud functions which we upload to moralis(by running yarn script ..) that means this script would be run continiously in the cloud.
+Now query the backend database in the Frontend to display the listings
+
+Using Graph(Preferred ✅)
+create a subgraph in graph UI(with same account logged in as that you deployed your marketplace contract with).
+create a new directory for graph(graph-nftmarketplace here).Install graph cli and init that.
+enter contract address as that of deployed marketplace contract.Because our marketplace contract is emitting all of the events that needs to be indexed (not the nft contract)

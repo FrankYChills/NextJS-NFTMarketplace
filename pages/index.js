@@ -1,16 +1,9 @@
-import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>NFT Marketplace</title>
-        <meta name="nft-marketplace" content="Sell and Buy Nfts" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.main}>
         <h2 className={styles.title}>
           Welcome to <a href="/">NFT MARKETPLACE</a>
