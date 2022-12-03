@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.1",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "graphql": "^16.6.0",
     "magic-sdk": "^10.1.0",
     "moralis": "^2.7.4",
     "moralis-v1": "^1.12.0",
