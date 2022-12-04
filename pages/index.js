@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
-import styles from "../styles/Home.module.css";
 import networkMapping from "../constants/networkMapping.json";
 import GET_ACTIVE_ITEMS from "../constants/subgraphQueries";
 import { useQuery } from "@apollo/client";
 import NftBox from "../components/NftBox";
 
 export default function Home() {
-  const { chainId, isWeb3Enabled } = useMoralis;
-  const chainString = chainId ? parseInt(chainId).toString() : "31337";
+  const { chainId, isWeb3Enabled } = useMoralis();
+  console.log(chainId);
+  console.log(isWeb3Enabled);
+  const chainString = chainId ? parseInt(chainId).toString() : "5";
   const marketplaceAddress = networkMapping[chainString][0];
   // get the data from graph
   const { loading, error, data: listedNfts } = useQuery(GET_ACTIVE_ITEMS);
@@ -23,13 +24,14 @@ export default function Home() {
             // display Nfts
             listedNfts.activeItems.map((nft) => {
               console.log(nft);
-              const { price, nftAddress, tokenId, seller } = nft;
+              const { price, nftAddress, tokenId, seller, id } = nft;
               return (
                 <NftBox
                   price={price}
                   nftAddress={nftAddress}
                   tokenId={tokenId}
                   seller={seller}
+                  key={id}
                 />
               );
             })
