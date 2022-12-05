@@ -3,10 +3,11 @@ import { MoralisProvider } from "react-moralis";
 import Header from "../components/Header";
 import Head from "next/head";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { NotificationProvider } from "web3uikit";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "https://api.studio.thegraph.com/query/38842/nft-marketplace/v0.0.1",
+  uri: "https://api.studio.thegraph.com/query/38842/nft-marketplace/v0.0.2",
 });
 function MyApp({ Component, pageProps }) {
   return (
@@ -18,8 +19,10 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <MoralisProvider initializeOnMount={false}>
         <ApolloProvider client={client}>
-          <Header />
-          <Component {...pageProps} />
+          <NotificationProvider>
+            <Header />
+            <Component {...pageProps} />
+          </NotificationProvider>
         </ApolloProvider>
       </MoralisProvider>
     </>
