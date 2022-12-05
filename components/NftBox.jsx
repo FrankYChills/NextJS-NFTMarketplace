@@ -104,7 +104,7 @@ function NftBox({ price, nftAddress, tokenId, seller }) {
     if (isWeb3Enabled) {
       updateUI();
     }
-  }, []);
+  }, [isWeb3Enabled]);
   return (
     <div>
       <div>

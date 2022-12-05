@@ -9,9 +9,13 @@ function Header() {
         <Link href="/" className="mr-4 p-6">
           Listings
         </Link>
+        <Link href="/mint-nft" className="mr-4 p-6">
+          Mint
+        </Link>
         <Link href="/sell-nft" className="mr-4 p-6">
           Sell NFT
         </Link>
+
         <ConnectButton moralisAuth={false} />
       </div>
     </nav>
