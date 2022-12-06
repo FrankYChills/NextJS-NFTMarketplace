@@ -8,6 +8,7 @@ const NFTCONTRACTADDRESS = "0xd0d3f00ccedb09373ff1ee3c563840f56c14e688";
 function mintnft() {
   const { isWeb3Enabled, chainId, account } = useMoralis();
   const [numNft, setNumNft] = useState(0);
+  const [disable, setDisable] = useState(false);
   const dispatch = useNotification();
   const { runContractFunction: getBalance } = useWeb3Contract({
     abi: nftabi,
@@ -43,6 +44,7 @@ function mintnft() {
       position: "topR",
       icon: "bell",
     });
+    setDisable(false);
   };
   useEffect(() => {
     if (isWeb3Enabled) {
@@ -51,10 +53,12 @@ function mintnft() {
   }, [account]);
   return isWeb3Enabled ? (
     <div className="container mx-auto">
-      <h1 className="py-4 px-4 mx-4 font-bold text-2xl">Mint NFT</h1>
+      <h1 className="py-4 px-4 ml-6 font-bold text-2xl">Mint NFT </h1>
       <button
-        className="bg-purple-900 hover:bg-green-800 text-white font-bold py-2 px-4 rounded ml-5"
+        disabled={disable}
+        className="bg-purple-900 hover:bg-green-800 text-white font-bold py-2 px-4 rounded ml-9"
         onClick={async () => {
+          setDisable(true);
           await MintNFT({
             onSuccess: handleSuccess,
             onError: (error) => console.log(error),
@@ -64,13 +68,18 @@ function mintnft() {
         {isLoading || isFetching ? (
           <div className="animate-spin spinner-border h-8 w-8 border-b-2 rounded-full"></div>
         ) : (
-          "Mint an NFT"
+          "Mint"
         )}
       </button>
-      <h2> You have total of : {numNft} NFTs </h2>
+      <h2 className="text-xl font-bold ml-6 mt-4">
+        {" "}
+        You have total of : {numNft} NFTs{" "}
+      </h2>
     </div>
   ) : (
-    <h1>Please Connect Your Wallet</h1>
+    <h1 className="text-xl font-bold ml-8 mt-5">
+      Please Connect Your Wallet To Mint an NFT
+    </h1>
   );
 }
 

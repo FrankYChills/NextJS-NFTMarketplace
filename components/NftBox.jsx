@@ -96,7 +96,7 @@ function NftBox({ price, nftAddress, tokenId, seller }) {
     await tx.wait(1);
     dispatch({
       type: "success",
-      message: "Nft Bought!",
+      message: "Please refresh",
       title: "Nft Bought!",
       position: "topR",
     });
@@ -107,7 +107,7 @@ function NftBox({ price, nftAddress, tokenId, seller }) {
     }
   }, [isWeb3Enabled]);
   return (
-    <div>
+    <div className="ml-3">
       <div>
         {imageURI ? (
           <div>
@@ -142,7 +142,7 @@ function NftBox({ price, nftAddress, tokenId, seller }) {
             </Card>
           </div>
         ) : (
-          <div>Loading ...</div>
+          ""
         )}
       </div>
     </div>

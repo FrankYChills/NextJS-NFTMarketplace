@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <div className="container mx-auto">
       <h1 className="py-4 px-4 mx-4 font-bold text-2xl">Listed NFTs</h1>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center">
         {isWeb3Enabled ? (
           loading || !listedNfts ? (
-            <div>Loading .....</div>
+            ""
           ) : (
             // display Nfts
             listedNfts.activeItems.map((nft) => {
@@ -34,7 +34,9 @@ export default function Home() {
             })
           )
         ) : (
-          <div>Please connect your Wallet to Start</div>
+          <div className="text-xl font-bold ml-8 mt-4">
+            Please connect your Wallet to See Listed NFTs
+          </div>
         )}
       </div>
     </div>

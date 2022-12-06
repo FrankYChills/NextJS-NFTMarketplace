@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
-import { Form, useNotification, Button } from "web3uikit";
+import { Form, useNotification } from "web3uikit";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import nftabi from "../constants/BasicNft.json";
 import networkMapping from "../constants/networkMapping.json";
@@ -98,7 +98,8 @@ function sellnft() {
     await tx.wait(1);
     dispatch({
       type: "success",
-      message: "Withdrawing proceeds",
+      message: "Please refresh",
+      title: "Holdings Withdrawn",
       position: "topR",
     });
   };
@@ -109,7 +110,7 @@ function sellnft() {
       console.log("Web3 is Enabled now");
       setupUI();
     }
-  }, [isWeb3Enabled, account]);
+  }, [isWeb3Enabled, account, holdings]);
   // UseEffect will always be triggered on first load and then whenever any of the dependency array item value changes
 
   return (
@@ -132,9 +133,12 @@ function sellnft() {
             title="Sell your NFT"
             id="Main Form"
           />
-          <div>Your Total Holdings are : {holdings / 1e18} ETH </div>
+          <div className="text-xl font-bold mt-2 ml-4">
+            Your Total Holdings are : {holdings / 1e18} ETH
+          </div>
           {holdings != "0" ? (
-            <Button
+            <button
+              className="bg-green-400 hover:bg-blue-500 text-black font-bold py-2 px-4 rounded ml-4 mt-3"
               onClick={() => {
                 runContractFunction({
                   params: {
@@ -147,15 +151,20 @@ function sellnft() {
                   onSuccess: (tx) => handleWithdrawSuccess(tx),
                 });
               }}
-              text="Withdraw Holdings"
-              type="button"
-            />
+            >
+              Withdraw Holdings
+            </button>
           ) : (
-            <div> Your don't have any Holdings </div>
+            <div className="text-l font-bold ml-4">
+              Currently , You don't have any Holdings
+            </div>
           )}
         </>
       ) : (
-        <div> Please Connect Your Wallet</div>
+        <div className="text-xl font-bold ml-2 mt-4">
+          {" "}
+          Please Connect Your Wallet To List an NFT
+        </div>
       )}
     </div>
   );
