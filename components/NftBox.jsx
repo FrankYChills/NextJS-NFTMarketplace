@@ -89,10 +89,11 @@ function NftBox({ price, nftAddress, tokenId, seller }) {
       ? setShowModal(true)
       : purchaseNft({
           onError: (error) => console.log(error),
-          onSuccess: () => handleBuyItemSuccess(),
+          onSuccess: (tx) => handleBuyItemSuccess(tx),
         });
   };
-  const handleBuyItemSuccess = () => {
+  const handleBuyItemSuccess = async (tx) => {
+    await tx.wait(1);
     dispatch({
       type: "success",
       message: "Nft Bought!",

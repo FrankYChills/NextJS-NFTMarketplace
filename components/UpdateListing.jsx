@@ -13,7 +13,8 @@ function UpdateListing({
   const [newPrice, setNewPrice] = useState(0);
   const dispatch = useNotification();
 
-  const handleUpdateListingSuccess = () => {
+  const handleUpdateListingSuccess = async (tx) => {
+    await tx.wait(1);
     dispatch({
       type: "success",
       message: "Nft Updated",
@@ -42,7 +43,7 @@ function UpdateListing({
       onOk={() => {
         updateNft({
           onError: (error) => console.log(error),
-          onSuccess: () => handleUpdateListingSuccess(),
+          onSuccess: (tx) => handleUpdateListingSuccess(tx),
         });
       }}
     >

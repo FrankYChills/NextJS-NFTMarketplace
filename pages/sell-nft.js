@@ -18,19 +18,26 @@ function sellnft() {
 
   const { runContractFunction } = useWeb3Contract();
 
-  const handleListSuccess = async () => {
+  const handleListSuccess = async (tx) => {
+    await tx.wait(1);
     dispatch({
       type: "success",
-      message: "NFT Listing",
+      message: "Please Refresh",
       title: "NFT Listed",
-      position: "topR",
+      position: "topL",
     });
   };
 
   const handleApproveSuccess = async (tx, nftAddress, tokenId, price) => {
+    await tx.wait(1);
+    dispatch({
+      type: "success",
+      message: "MarketPlace Approved",
+      position: "topL",
+    });
     console.log(`Marketplace approved for nft with tokenId of ${tokenId}`);
     console.log("Ok! Now listing nft to marketplace");
-    await tx.wait(1);
+
     const listOptions = {
       abi: marketplaceAbi,
       contractAddress: marketplaceAddress,
@@ -43,7 +50,7 @@ function sellnft() {
     };
     await runContractFunction({
       params: listOptions,
-      onSuccess: () => handleListSuccess(),
+      onSuccess: handleListSuccess,
       onError: (error) => console.log(error),
     });
   };
@@ -87,7 +94,8 @@ function sellnft() {
       setHoldings(returnedHoldings.toString());
     }
   }
-  const handleWithdrawSuccess = () => {
+  const handleWithdrawSuccess = async (tx) => {
+    await tx.wait(1);
     dispatch({
       type: "success",
       message: "Withdrawing proceeds",
@@ -136,7 +144,7 @@ function sellnft() {
                     params: {},
                   },
                   onError: (error) => console.log(error),
-                  onSuccess: () => handleWithdrawSuccess(),
+                  onSuccess: (tx) => handleWithdrawSuccess(tx),
                 });
               }}
               text="Withdraw Holdings"
