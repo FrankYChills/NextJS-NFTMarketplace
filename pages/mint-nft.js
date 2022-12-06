@@ -5,7 +5,7 @@ import { useNotification } from "web3uikit";
 
 const NFTCONTRACTADDRESS = "0xd0d3f00ccedb09373ff1ee3c563840f56c14e688";
 
-function mintnft() {
+function Mintnft() {
   const { isWeb3Enabled, chainId, account } = useMoralis();
   const [numNft, setNumNft] = useState(0);
   const [disable, setDisable] = useState(false);
@@ -50,7 +50,7 @@ function mintnft() {
     if (isWeb3Enabled) {
       getNum();
     }
-  }, [account]);
+  }, [account, isWeb3Enabled]);
   return isWeb3Enabled ? (
     <div className="container mx-auto">
       <h1 className="py-4 px-4 ml-6 font-bold text-2xl">Mint NFT </h1>
@@ -83,4 +83,4 @@ function mintnft() {
   );
 }
 
-export default mintnft;
+export default Mintnft;

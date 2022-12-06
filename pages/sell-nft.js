@@ -6,7 +6,7 @@ import nftabi from "../constants/BasicNft.json";
 import networkMapping from "../constants/networkMapping.json";
 import marketplaceAbi from "../constants/NftMarketplace.json";
 
-function sellnft() {
+function Sellnft() {
   const { isWeb3Enabled, chainId, account } = useMoralis();
 
   const [holdings, setHoldings] = useState("0");
@@ -156,7 +156,7 @@ function sellnft() {
             </button>
           ) : (
             <div className="text-l font-bold ml-4">
-              Currently , You don't have any Holdings
+              Currently , You dont have any Holdings
             </div>
           )}
         </>
@@ -170,4 +170,4 @@ function sellnft() {
   );
 }
 
-export default sellnft;
+export default Sellnft;
